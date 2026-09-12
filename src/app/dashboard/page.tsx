@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ToolCard from "@/components/ToolCard";
 import {
@@ -13,6 +13,14 @@ import {
 import type { ToolCategory, ToolSection } from "@/lib/tools-registry";
 
 export default function DashboardPage() {
+  return (
+    <Suspense>
+      <DashboardContent />
+    </Suspense>
+  );
+}
+
+function DashboardContent() {
   const searchParams = useSearchParams();
   const sectionParam = searchParams.get("section") as ToolSection | null;
   const categoryParam = searchParams.get("category");
